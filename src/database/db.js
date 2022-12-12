@@ -1,6 +1,9 @@
 import mongoose from 'mongoose';
 mongoose.set('strictQuery', false)
-const uri = 'mongodb+srv://admin:ShZIWQSM64kHuv56@blog.xm5mbuk.mongodb.net/?retryWrites=true&w=majority'
+import dotenv from 'dotenv'
+dotenv.config()
+
+const uri = process.env.URI_MONGODB
 
 const database = {
   async connect() {
