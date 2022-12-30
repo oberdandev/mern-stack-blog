@@ -23,7 +23,11 @@ const userController = {
               email,
               avatar,
               background}})
-          } catch(err) {res.status(400).send({messsage: 'Error at create user', error: err.message, stack: err.stack})}
+          } catch(err) {
+            res.status(400).send({
+              messsage: 'Error at create user', error: err.message, stack: err.stack
+            })
+          }
       },
 
   async findAll(req,res) {
@@ -32,14 +36,19 @@ const userController = {
       .then((docs) => 
       { 
         docs.map(doc => {console.log(doc)}) 
-        res.status(201).send(docs)
+        res.status(200).send(docs)
       })
       .catch(err => 
        {
         console.log('Error trying to find all users from mongodb /n' + err)
         res.status(500).send({message: "Error trying to find all users from mongodb", err})
-      })} 
-    catch(err) {res.status(500).send({message: err.message}) 
+      })
+    } 
+    catch(err) {
+      res.status(500).send(
+        {
+          message: err.message
+        })
       }
   },
 
