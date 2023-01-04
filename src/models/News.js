@@ -1,7 +1,6 @@
 import mongoose from 'mongoose';
-import bcrypt from 'bcrypt'
 
-const News = new mongoose.Schema({
+const NewsSchema = new mongoose.Schema({
     title: {
         type: String,
         required: true
@@ -36,6 +35,8 @@ const News = new mongoose.Schema({
         required: true
     },
 })
+
+const News = mongoose.model('News', NewsSchema)
 
 
 export {News}
