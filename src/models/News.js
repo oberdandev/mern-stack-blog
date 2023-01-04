@@ -39,4 +39,4 @@ const NewsSchema = new mongoose.Schema({
 const News = mongoose.model('News', NewsSchema)
 
 
-export {News}
+export default News
