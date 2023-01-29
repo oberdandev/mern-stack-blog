@@ -23,19 +23,23 @@ const New = {
         }
     },
 
-    async findAll(req,res) {
-      let {offset, limit} = req.query
+  async findAll(req,res) {
+    let {offset, limit} = req.query
+    const currentUrl = req.baseUrl
+    
+    offset = Number(offset)
+    limit = Number(limit)
+    
+    if(!offset) offset = 0
+    if(!limit) limit = 5
 
-      if(!offset) offset = 0
-      if(!limit) limit = 5
+    const news = await NewsService.findAll(offset, limit)
 
-      const news = await NewsService.findAll(offset, limit)
-
-        if(news.length === 0){
-            return res.status(400).send({
-                messsage: "There are no registered news available"
-            })
-        }
+    if(news.length === 0){
+      return res.status(400).send({
+        messsage: "There are no registered news available"
+      })
+    }
 
         res.send(news)
     },
