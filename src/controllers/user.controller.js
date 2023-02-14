@@ -32,14 +32,14 @@ const userController = {
 
   async findAll(req,res) {
     try{
-        const docs = UserService.findAll()
+      const docs = UserService.findAll()
       .then((docs) => 
       { 
         docs.map(doc => {console.log(doc)}) 
         res.status(200).send(docs)
       })
       .catch(err => 
-       {
+      {
         console.log('Error trying to find all users from mongodb /n' + err)
         res.status(500).send({message: "Error trying to find all users from mongodb", err})
       })
@@ -82,7 +82,5 @@ const userController = {
   },
 
 }
-
-
 
 export default userController

@@ -29,6 +29,12 @@ const New = {
       if(!offset) offset = 0
       if(!limit) limit = 5
 
+      offset = Number(offset)
+      limit = Number(limit)
+
+
+      const next = {offset: 5, limit: 5}
+
       const news = await NewsService.findAll(offset, limit)
 
         if(news.length === 0){
