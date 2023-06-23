@@ -6,5 +6,7 @@ const router = Router()
 
 router.post('/', authMiddleware, New.create)
 router.get('/', New.findAll)
+router.get('/top', New.topNews)
+router.get('/:id', New.findById);
 
 export default router;

@@ -10,7 +10,7 @@ export const authMiddleware = async(req, res, next) => {
     if(parts.length !== 2) return res.send(401)
     
     const [schema, token] = parts    
-    if(schema !== 'Bearer') res.status(401).send('Use a Bearer token to access')
+    if(schema !== 'Bearer') res.sendStatus(401).send('Use a Bearer token to access')
     
     jwt.verify(token, process.env.SECRET_JWT, async (err, decoded) => {
       if(err) res.status(401).send('Invalid token')
@@ -22,7 +22,7 @@ export const authMiddleware = async(req, res, next) => {
       req.userId = user.id
       req.userData = user
       
-      next()
+     return next();
     })
     }catch(err){
         return res.status(500).send({message: err})
