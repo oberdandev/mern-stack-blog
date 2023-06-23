@@ -75,7 +75,6 @@ const New = {
     },
 
     topNews: async(req,res) => {
-     
      try{
       const news = await NewsService.topNewsService();
       if(!news) return res.sendStatus(400).send({message: "There is no registered post"})
@@ -116,13 +115,9 @@ const New = {
           userId: news.user._id,
           userAvatar: news.user.avatar,
         })
-
-
       }catch(err){
         return res.status(400).send(err.message)
       }
-      
-
     }
 
   }
