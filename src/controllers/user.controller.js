@@ -39,7 +39,7 @@ const userController = {
         res.status(200).send(docs)
       })
       .catch(err => 
-      {
+       {
         console.log('Error trying to find all users from mongodb /n' + err)
         res.status(500).send({message: "Error trying to find all users from mongodb", err})
       })
