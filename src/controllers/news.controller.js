@@ -118,6 +118,11 @@ const New = {
       }catch(err){
         return res.status(400).send(err.message)
       }
+    },
+
+    async searchByTitleOrText(req, res){
+      const news = await NewsService.searchByTitleOrText();
+      
     }
 
   }
