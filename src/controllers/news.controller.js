@@ -103,7 +103,7 @@ const New = {
         const news = await NewsService.findOneById(newsID);
         if(!news) return res.send({message: "There's is no post with this id: " + newsID})
 
-        res.send({
+        return  res.send({
           id: news._id,
           title: news.title,
           text: news.text,
@@ -121,10 +121,41 @@ const New = {
     },
 
     async searchByTitleOrText(req, res){
-      const news = await NewsService.searchByTitleOrText();
-      
-    }
+     try{
+      const {q} = req.query
 
+      const news = await NewsService.searchByTitleOrText(q);
+      if(!news.length === 0) return res.status(400).send({message: "There are no news with this title or content text"});
+      console.log(news)
+      
+      return  res.send({  
+        result: news.map(item => (
+          { 
+            id: item._id,
+            title: item.title,
+            text: item.text,
+            banner: item.banner,
+            likes: item.likes,
+            comments: item.comments,
+            name: item.user.name,
+            userName: item.user.username,
+            userId: item.user._id,
+            userAvatar: item.user.avatar,
+          }))
+      })
+    }catch(err){
+       res.status(500).send({message: err.message});
+    }
+    },
+
+    async searchByUser(req,res){
+      try{
+        const {userId} = req.params.id
+        
+      }catch(err){
+        return res.status(400).send(err.message)
+      }
+    }
   }
 
 export default New

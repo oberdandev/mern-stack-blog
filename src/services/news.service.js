@@ -7,16 +7,18 @@ const NewsService =  {
     countNews: async() => News.countDocuments(),
     topNewsService: async()=> News.findOne().sort({_id: -1}).populate('user'),
     findOneById: async(id) => News.findById(id).populate('user'),
-    searchByTitleOrText: async(title) => 
-    {   return (
-        News.find({title: {$regex: `${title} || ""}`, $options: "i"}})
+    searchByTitleOrText: async(text) => {    
+     
+      const searchByTitle = await News.find({title: {$regex: `${text || ""}`, $options: "i"},
+      }).sort({_id: -1}).populate('user')  
+      if(searchByTitle.length === 0) {
+        return News.find({text: {$regex: `${text || ""}`, $options: "i"}})
         .sort({_id: -1})
-        .populate('user')  
-        || 
-        News.find({text: {$regex: `${title} || ""}`, $options: "i"}})
-        .sort({_id: -1})
-        .populate('user'))
-    }   
+        .populate('user')
+      }
+      return searchByTitle;
+    }
+    
 } 
 
 export default NewsService
