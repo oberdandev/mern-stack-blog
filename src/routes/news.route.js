@@ -13,5 +13,6 @@ router.get('/:id', New.findById);
 
 router.patch('/:id', authMiddleware, New.update);
 router.delete('/:id', authMiddleware, New.delete);
+router.patch('/like/:id', authMiddleware, New.likes)
 
 export default router;
